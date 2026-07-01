@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PageClaw</title>
+  <link rel="stylesheet" href="./sidepanel.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🦞 PageClaw</div>
+    <button id="refreshBtn" title="刷新状态">刷新</button>
+  </header>
+
+  <main class="app">
+    <section class="card hero">
+      <div class="eyebrow">普通用户模式</div>
+      <h1>把已登录的网页模型变成本地接口</h1>
+      <p>打开 DeepSeek、千问、GLM、豆包等网页并保持登录，PageClaw 会模拟成 PageAgent 可用的 OpenAI-Compatible Provider。</p>
+    </section>
+
+    <section class="card status-card">
+      <h2>当前模型</h2>
+      <div id="providerName" class="big-status">检测中…</div>
+      <div id="providerHint" class="hint">请打开并登录一个模型聊天网页。</div>
+      <div id="models" class="models"></div>
+      <button id="detectBtn" class="primary">识别当前页面</button>
+    </section>
+
+    <section class="card status-card">
+      <h2>本地代理</h2>
+      <div id="bridgeStatus" class="big-status">未连接</div>
+      <div id="bridgeHint" class="hint">启动 Bridge 后，本机客户端可访问 PageClaw Provider。</div>
+      <button id="startBridgeBtn" class="primary">开始连接</button>
+      <button id="copyConfigBtn">复制客户端配置</button>
+      <details>
+        <summary>高级信息</summary>
+        <pre id="advancedInfo"></pre>
+      </details>
+    </section>
+
+    <section class="card status-card">
+      <h2>页面智能体</h2>
+      <p class="hint">把 PageAgent 接到本机 Provider，让它操作当前业务页面。</p>
+      <button id="copyAdapterBtn">复制 PageAgent 配置</button>
+    </section>
+  </main>
+
+  <script src="./sidepanel.js"></script>
+</body>
+</html>
