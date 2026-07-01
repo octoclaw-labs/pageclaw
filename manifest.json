@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "PageClaw - AI Web Agent",
+  "version": "0.18.0",
+  "description": "Turn signed-in web model pages into local OpenAI-compatible providers for PageAgent.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs",
+    "sidePanel",
+    "alarms",
+    "clipboardWrite",
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "http://127.0.0.1:*/*",
+    "http://localhost:*/*"
+  ],
+  "action": {
+    "default_title": "Open PageClaw"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/index.html"
+  },
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "pageagent/pageclaw-pageagent-adapter.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
