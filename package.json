@@ -1,0 +1,19 @@
+{
+  "name": "pageclaw",
+  "version": "0.18.0-beta.1",
+  "private": true,
+  "description": "Browser-native local AI web agent provider for PageAgent and OpenAI-compatible clients.",
+  "scripts": {
+    "bridge": "node bridge/server.js",
+    "check": "node --check bridge/server.js && node --check background/service-worker.js && node --check content/content-main.js && node --check sidepanel/sidepanel.js && node --check pageagent/pageclaw-pageagent-adapter.js",
+    "smoke": "node scripts/smoke-test.js"
+  },
+  "keywords": [
+    "chrome-extension",
+    "pageagent",
+    "browser-agent",
+    "openai-compatible",
+    "local-first"
+  ],
+  "license": "Apache-2.0"
+}
