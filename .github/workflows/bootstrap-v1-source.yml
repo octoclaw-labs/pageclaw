@@ -1,0 +1,44 @@
+name: Bootstrap PageClaw v1 Source
+
+on:
+  push:
+    branches:
+      - release/v1.0.0
+    paths:
+      - .bootstrap/v1/source.part-004
+
+permissions:
+  contents: write
+
+jobs:
+  restore-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release branch
+        uses: actions/checkout@v4
+        with:
+          ref: release/v1.0.0
+          fetch-depth: 0
+
+      - name: Restore source tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/v1/source.part-* | base64 --decode > /tmp/pageclaw-v1-source.tar.xz
+          echo "59c942f61376ebd344d0026059ad9edc6c54e17d37db978074930c82416e02ee  /tmp/pageclaw-v1-source.tar.xz" | sha256sum --check --strict
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          tar -xJf /tmp/pageclaw-v1-source.tar.xz -C .
+
+      - name: Commit restored v1 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          if git diff --cached --quiet; then
+            echo "No source changes to commit."
+            exit 0
+          fi
+          git commit -m "feat(release): establish PageClaw v1.0.0 GA source"
+          git push origin HEAD:release/v1.0.0
